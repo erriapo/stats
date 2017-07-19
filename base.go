@@ -37,7 +37,7 @@ type WelfordSink struct {
 }
 
 func NewSink() *WelfordSink {
-	return &WelfordSink{}
+	return &WelfordSink{observationMin: math.Inf(-1)}
 }
 
 func (s *WelfordSink) Push(x float64) error {
@@ -59,6 +59,17 @@ func (s *WelfordSink) Push(x float64) error {
 		s.nOld = s.mNew
 	}
 
+	// @TODO move to internal function
+	// is this a candidate for minimum?
+	if math.IsInf(s.observationMin, 0) {
+		if x > s.observationMin {
+			s.observationMin = x
+		}
+	} else {
+		if x < s.observationMin {
+			s.observationMin = x
+		}
+	}
 	return nil
 }
 

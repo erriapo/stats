@@ -44,7 +44,11 @@ func TestTypes(t *testing.T) {
 
 func isCloseTo(x, target float64) bool {
 	fmt.Printf("%g // %g\n\n", x-target, EPSILON)
-	return math.Abs(x-target) < EPSILON
+	if math.IsInf(x, 0) && math.IsInf(target, 0) {
+		return x == target
+	} else {
+		return math.Abs(x-target) < EPSILON
+	}
 }
 
 func TestZeroValue(t *testing.T) {
@@ -57,7 +61,7 @@ func TestZeroValue(t *testing.T) {
 		t.Error("not Variability")
 	}
 	min := v.Min()
-	if !isCloseTo(min, 0.000000) {
+	if !isCloseTo(min, math.Inf(-1)) {
 		t.Errorf("got '%v' ; want '%v'", min, 0.00)
 	}
 }
@@ -71,12 +75,16 @@ func TestValidValuesAndCounts(t *testing.T) {
 
 func TestMean(t *testing.T) {
 	s := NewSink()
-	s.Push(1.0)
-	s.Push(3.0)
 	s.Push(5.0)
+	s.Push(3.0)
+	s.Push(1.0)
 	mean := s.Mean()
 	fmt.Printf("mean is %g\n", mean)
 	if !isCloseTo(mean, 3.0) {
 		t.Errorf("got '%v' ; want '%v'", mean, 3.0)
+	}
+
+	if !isCloseTo(s.Min(), 1.0) {
+		t.Errorf("got '%v' ; want '%v'", s.Min(), 1.0)
 	}
 }
