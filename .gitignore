@@ -1,6 +1,7 @@
 *.swp
 .DS_Store
 src
+pkg
 tmp
 tags
 
