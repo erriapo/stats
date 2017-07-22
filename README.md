@@ -1,4 +1,4 @@
-![GoDoc](https://godoc.org/github.com/erriapo/stats?status.png)](https://godoc.org/github.com/erriapo/stats)
+[![GoDoc](https://godoc.org/github.com/erriapo/stats?status.png)](https://godoc.org/github.com/erriapo/stats)
 
 An implementation of B.P. Welford's algorithm to maintain a running variance
 over a stream of observations. 
