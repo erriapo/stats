@@ -1,5 +1,7 @@
 [![Build Status](https://secure.travis-ci.org/erriapo/stats.png)](https://travis-ci.org/erriapo/stats)
 
+[![Go Report Card](https://goreportcard.com/badge/github.com/erriapo/stats)](https://goreportcard.com/report/github.com/erriapo/stats)
+
 [![GoDoc](https://godoc.org/github.com/erriapo/stats?status.png)](https://godoc.org/github.com/erriapo/stats)
 
 An implementation of B.P. Welford's algorithm to maintain a running variance
@@ -10,7 +12,7 @@ This code is based on a John D Cook's [blogpost](https://www.johndcook.com/blog/
 ## Example usage
 
 ```go
-s := stats.NewSink() 
+s := stats.NewSink()
 s.Push(-1.1813782)
 s.Push(-0.2449577)
 s.Push(0.8799429)
