@@ -85,6 +85,9 @@ func TestValidValuesAndCounts(t *testing.T) {
 	if err := s.Push(math.Inf(1)); err == nil {
 		t.Errorf("expected %v ; got nil", ErrInvalidValue)
 	}
+	if err := s.Push(math.Inf(-1)); err == nil {
+		t.Errorf("expected %v ; got nil", ErrInvalidValue)
+	}
 }
 
 type fixtureTest struct {
