@@ -14,7 +14,6 @@ func init() {
 }
 
 func TestMain(m *testing.M) {
-	//fmt.Println("testmain")
 	os.Exit(m.Run())
 }
 
@@ -87,6 +86,19 @@ func TestValidValuesAndCounts(t *testing.T) {
 	}
 	if err := s.Push(math.Inf(-1)); err == nil {
 		t.Errorf("expected %v ; got nil", ErrInvalidValue)
+	}
+}
+
+func TestOnlyOneSample(t *testing.T) {
+	s := NewSink()
+	if err := s.Push(99.9); err != nil {
+		t.Errorf("expected nil ; got error %v", err)
+	}
+	if s.Count() != 1 {
+		t.Errorf("expected 1 ; got error %v", s.Count())
+	}
+	if !isCloseTo(toFixed(s.StandardDeviation(), 3), 0) {
+		t.Errorf("expected 0 ; got %v", s.StandardDeviation())
 	}
 }
 

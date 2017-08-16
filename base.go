@@ -54,7 +54,8 @@ func (s *WelfordSink) variance() float64 {
 	return 0.0
 }
 
-// StandardDeviation returns the running sd of the observations
+// StandardDeviation returns the running sd of the observations.
+// To be specific, this is the "sample" sd (c.f population sd).
 func (s *WelfordSink) StandardDeviation() float64 {
 	return math.Sqrt(s.variance())
 }
